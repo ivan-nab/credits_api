@@ -1,9 +1,5 @@
 from rest_framework import routers
 from partners_api.views import CreditOfferViewSet, ClientCreditFormViewSet, CreditRequestViewSet
-from partners_api.permissions import SwaggerAccessPolicy
-from django.urls import path, re_path
-
-
 
 router = routers.DefaultRouter()
 router.register('offers', CreditOfferViewSet)
