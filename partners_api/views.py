@@ -1,19 +1,15 @@
 from django_filters.rest_framework import DjangoFilterBackend
+from drf_yasg.utils import swagger_auto_schema
 from rest_framework import filters, viewsets
 from rest_framework.decorators import action
 from rest_framework.response import Response
 from rest_framework.status import HTTP_200_OK, HTTP_201_CREATED
 
 from core.filters import ClientCreditFormFilter
-from core.models import (ClientCreditForm, CreditOffer, CreditRequest)
-from partners_api.permissions import (ClientCreditFormAccessPolicy, CreditRequestAccessPolicy, CreditOfferAccessPolicy)
-from partners_api.serializers import (
-    AdminClientCreditFormSerializer,
-    ClientCreditFormSerializer,
-    CreditOfferReadSerializer,
-    CreditRequestSerializer,
-    CreditRequestWriteSerializer,
-)
+from core.models import ClientCreditForm, CreditOffer, CreditRequest
+from partners_api.permissions import (ClientCreditFormAccessPolicy, CreditOfferAccessPolicy, CreditRequestAccessPolicy)
+from partners_api.serializers import (AdminClientCreditFormSerializer, ClientCreditFormSerializer,
+                                      CreditOfferReadSerializer, CreditRequestSerializer, CreditRequestWriteSerializer)
 
 
 class CreditOfferViewSet(viewsets.ModelViewSet):
@@ -54,6 +50,7 @@ class ClientCreditFormViewSet(viewsets.ModelViewSet):
             return AdminClientCreditFormSerializer
         return ClientCreditFormSerializer
 
+    @swagger_auto_schema(method='GET', responses={200: CreditOfferReadSerializer})
     @action(methods=['GET'], detail=True, url_path='relevant-offers')
     def relevant_offers(self, request, pk):
         """
@@ -66,6 +63,9 @@ class ClientCreditFormViewSet(viewsets.ModelViewSet):
             serializer = CreditOfferReadSerializer(offers_qs, many=True)
         return Response(serializer.data, status=HTTP_200_OK)
 
+    @swagger_auto_schema(method='POST',
+                         request_body=CreditRequestWriteSerializer,
+                         responses={201: CreditRequestSerializer(many=True)})
     @action(methods=['POST'], detail=True, url_path='send-to-banks')
     def send_to_banks(self, request, pk):
         """

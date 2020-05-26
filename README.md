@@ -1,5 +1,5 @@
 # API для формирования и исполнения заявок в кредитные организации
-
+[![Codeship Status for ivan-nab/credits_api](https://app.codeship.com/projects/4ff62410-81c1-0138-f323-7e65aa17defc/status?branch=master)](https://app.codeship.com/projects/397904)
 ## Стек технологий
 
 - Django 3.0
@@ -113,3 +113,6 @@ POST /banks-api/v1/request/<id>/set-status/
 - не могут удалять и редактировать ничего
 - могут изменить в заявке статус
 
+### Документация
+Документация в формате OpenAPI/Swagger 
+доступна по url/swagger
