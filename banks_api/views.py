@@ -1,13 +1,13 @@
 from django_filters.rest_framework import DjangoFilterBackend
+from drf_yasg.utils import swagger_auto_schema
 from rest_framework import filters, viewsets
 from rest_framework.decorators import action
 from rest_framework.response import Response
 from rest_framework.status import HTTP_200_OK
 
+from banks_api.filters import ClientRequestFormFilter
 from banks_api.permissions import CreditRequestAccessPolicy
 from banks_api.serializers import CreditRequestReadSerializer, StatusSerializer
-from banks_api.filters import ClientRequestFormFilter
-
 from core.models import CreditRequest
 
 
@@ -33,6 +33,9 @@ class CreditRequestViewSet(viewsets.ReadOnlyModelViewSet):
     def get_queryset(self):
         return self.access_policy.scope_queryset(self.request, CreditRequest.objects.all())
 
+    @swagger_auto_schema(method='POST',
+                         request_body=StatusSerializer,
+                         responses={200: CreditRequestReadSerializer})
     @action(methods=['POST'], detail=True, url_path='set-status')
     def set_status(self, request, pk):
         """
