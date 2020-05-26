@@ -45,8 +45,8 @@ class ClientCreditForm(models.Model):
     surname = models.CharField(verbose_name='Отчество клиента', max_length=100)
     firstname = models.CharField(verbose_name='Имя клиента', max_length=100)
     birthday = models.DateField(verbose_name='Дата рождения клиента')
-    phone_num = models.CharField(verbose_name='Номер телефона', max_length=20)
-    passport_num = models.CharField(verbose_name='Номер паспорта', max_length=20)
+    phone_num = models.CharField(verbose_name='Номер телефона', max_length=40)
+    passport_num = models.CharField(verbose_name='Номер паспорта', max_length=40)
     score = models.IntegerField(verbose_name='Cкоринговый балл клиента',
                                 validators=[MinValueValidator(1), MaxValueValidator(1000)])
     partner = models.ForeignKey(verbose_name='Партнер', to=Organization, on_delete=models.CASCADE)
