@@ -42,6 +42,8 @@ INSTALLED_APPS = [
     'rest_auth',
     'django_filters',
     'partners_api',
+    'drf_yasg',
+    'banks_api',
     'core',
 ]
 
@@ -140,4 +142,15 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.TokenAuthentication',
     ],
     'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend']
+}
+
+SWAGGER_SETTINGS = {
+    'SECURITY_DEFINITIONS': {
+
+        'Bearer': {
+            'type': 'apiKey',
+            'name': 'Authorization',
+            'in': 'header'
+        }
+    }
 }

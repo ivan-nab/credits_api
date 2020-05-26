@@ -15,7 +15,7 @@ class CreditOfferSerializer(ModelSerializer):
         fields = ['name', 'type']
 
 
-class ClientCreditFormSerializer(ModelSerializer):
+class BanksClientCreditFormSerializer(ModelSerializer):
     partner = StringRelatedField()
 
     class Meta:
@@ -24,7 +24,7 @@ class ClientCreditFormSerializer(ModelSerializer):
 
 
 class CreditRequestReadSerializer(ModelSerializer):
-    client_credit_form = ClientCreditFormSerializer()
+    client_credit_form = BanksClientCreditFormSerializer()
     credit_offer = CreditOfferSerializer()
 
     class Meta:
