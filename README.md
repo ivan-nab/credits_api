@@ -19,7 +19,14 @@ git clone https://github.com/ivan-nab/credits_api.git
 cd credits_api
 docker-compose up
 ```
+По умолчанию загружаются данные initial_data
 
+Логин и пароль администратора:
+| Логин | Пароль |
+|-------|--------|
+|admin|1|
+
+У всех пользователей пароль по усмолчанию - ```1```
 ## Функционал API
 
 API разделено на два интерфейса
