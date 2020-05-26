@@ -1,0 +1,8 @@
+.vscode/**
+.devcontainer/**
+deps/**
+venv/**
+*.pyc
+.coverage
+.idea/**
+.coverage
